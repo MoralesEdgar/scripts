@@ -20,6 +20,7 @@ echo " 5.Ver datos de un usuario"
 echo " 6.Borrar un usuario"
 echo " 7.Borrar un grupo"
 echo " 8.Ver los grupos"
+echo " 9.Ver los usuarios"
 echo " 0.Salir"
 
 read opcion
@@ -79,6 +80,9 @@ delgroup $grupo
 echo"Los grupos son los siguientes: "
 vim /etc/group
 ;;
+9)
+echo"Los usuarios son los siguientes: "
+vim /etc/passwd
 
 esac
 done
