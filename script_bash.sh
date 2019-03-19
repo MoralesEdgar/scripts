@@ -21,6 +21,8 @@ echo " 6.Borrar un usuario"
 echo " 7.Borrar un grupo"
 echo " 8.Ver los grupos"
 echo " 9.Ver los usuarios"
+echo " 10.Ver los grupos"
+echo " 11.Matar un proceso"
 echo " 0.Salir"
 
 read opcion
@@ -83,6 +85,17 @@ vim /etc/group
 9)
 echo"Los usuarios son los siguientes: "
 vim /etc/passwd
+
+10)
+echo"Los procesos son los siguientes: "
+ps -ef
+;;
+
+11)
+echo"Escribe el numero del PID: "
+read pid
+kill -9 $pid
+;;
 
 esac
 done
