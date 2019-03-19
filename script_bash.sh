@@ -91,7 +91,7 @@ echo"Los procesos son los siguientes: "
 ps -ef
 ;;
 11)
-echo"Escribe el numero del PID: "
+echo "Escribe el numero del PID: "
 read pid
 kill -9 $pid
 ;;
