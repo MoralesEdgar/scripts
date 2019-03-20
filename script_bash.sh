@@ -101,6 +101,11 @@ echo "Escribe el nombre del usuario"
 read usuario
 su $usuario
 ;;
+13)
+echo "Escribe el nombre del usuario para agregarlo a sudo"
+read sudousuario
+adduser $sudousuario sudo
+;;
 
 esac
 done
