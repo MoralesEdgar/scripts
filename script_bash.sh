@@ -23,6 +23,7 @@ echo " 8.Ver los grupos"
 echo " 9.Ver los usuarios"
 echo " 10.Ver los procesos"
 echo " 11.Matar un proceso"
+echo " 12. Cambio de usuario"
 echo " 0.Salir"
 
 read opcion
@@ -94,6 +95,11 @@ ps -ef
 echo "Escribe el numero del PID: "
 read pid
 kill -9 $pid
+;;
+12)
+echo "Escribe el nombre del usuario"
+read usuario
+su $usuario
 ;;
 
 esac
