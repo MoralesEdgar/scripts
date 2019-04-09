@@ -16,7 +16,7 @@ then
 	read name_file
 	cd $nombre_usuario
 	touch $name_file
-	tree -L X
+	tree -L 3
 	exit 0
 fi
 exit0	
