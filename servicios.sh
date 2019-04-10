@@ -13,6 +13,6 @@ do
         ;;
      *)
  echo "Opcion Invalida..."
+ exit 1
  ;;
  esac
-done
