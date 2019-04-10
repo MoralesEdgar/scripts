@@ -35,11 +35,13 @@ do
 	;;
 	2)
 	sudo service $nombre_servicio stop
+	exit 1
 	;;
 	3)
 	sudo service $nombre_servicio start
+	exit 1
 	;;
-	
+
 	esac
 	done
 	exit 0
