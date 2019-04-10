@@ -6,7 +6,18 @@ do
  
  case $input in
      [yY][eE][sS]|[yY])
- echo "Yes"
+ service --status-all | grep +
+ echo "Escribe el nombre del servicio del que quieres ver su estatus:"
+ read nombre_servicio
+ tmp=`ps awx | grep $nombre_servicio |grep -v grep|wc -l`
+ echo ""
+ if [ $tmp != 0 ]; then
+	echo "El estado del servicio es el siguiente:"
+	echo ""
+	echo ""
+ 	service $nombre_servicio status
+ fi
+ exit 1
  ;;
      [nN][oO]|[nN])
  echo "No"
