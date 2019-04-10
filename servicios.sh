@@ -30,34 +30,30 @@ do
 		echo ""
  		service $nombre_servicio status
  	fi
- 	echo "El servicio no se encuentra activo."
+ 	echo "El servicio no se encuentra activo o esta mal escrito."
  	exit 1
 	;;
 	2)
 	{
 		sudo service $nombre_servicio stop
 		echo "El servicio se ha detenido correctamente."
+		service $nombre_servicio status
 		exit 1
 	} || {
 		echo "Hubo un problema al detener el servicio."
 		exit 1
 	}
-	#sudo service $nombre_servicio stop
-	#echo ""
-	#echo "Se ha detenido correct"
-	#exit 1
 	;;
 	3)
 	{
 		sudo service $nombre_servicio start
 		echo "El servicio se ha iniciado correctamente."
+		service $nombre_servicio status
 		exit 1
 	} || {
 		echo "Hubo un problema al iniciar el servicio."
 		exit 1
 	}
-	#sudo service $nombre_servicio start
-	#exit 1
 	;;
 
 	esac
