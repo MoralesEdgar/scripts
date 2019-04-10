@@ -1,16 +1,36 @@
 #!/bin/bash
 
-echo "Ingresa el correo electronico al cual sera enviado:"
-read email
+ user="root"
+ password=""
+ host="localhost"
 
-backup_path="/home/edgarmorales/backup_db"
-fecha=$(date + "%d-%b-%Y")
+# WARNING: Never user the root "/" as backup_path
+# This folder must be exist:
+ backup_path="/home/edgarmorales/backup_db"
 
-umask 177
+# The maximum of backups to keep
+# (the oldest backups will be erased)
+ maximum_backup_folders=3
 
-mysqldump -u root servidores > backup_path/backup_servidores-$date.sql
+# Create a folder using actual date to storage the backup
+ date=$(date +"%Y-%m-%d_-_%H-%M-%S")
+ mkdir $backup_path/$date
 
-xz -9 $backup_path/backup_servidores-$date.sql
+# Get a list of all databases in MySQL
+ databases=$(mysql --user=$user --password=$password -e "SHOW DATABASES;" | grep -Ev "(Database|information_schema)")
 
-mail -s "Backup BD servidores." $email
+# Create a file dumps for each database
+ for db in $databases
+  do
+   mysqldump --user=$user --password=$password --host=$host $db | gzip -9 > $backup_path/$date/$db.sql.gz
+ done
 
+# Remove the oldest backups
+ total_backup_folders=$(ls -tr $backup_path | wc -l)
+ if [ $total_backup_folders -gt $maximum_backup_folders ];then
+  to_delete=$(( $total_backup_folders - $maximum_backup_folders ));
+  for delete_folder in $(ls -tr $backup_path | head -$to_delete);
+   do
+    rm -rf $backup_path/$delete_folder;
+  done
+ fi;
