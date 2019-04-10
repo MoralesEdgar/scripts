@@ -34,12 +34,30 @@ do
  	exit 1
 	;;
 	2)
-	sudo service $nombre_servicio stop
-	exit 1
+	{
+		sudo service $nombre_servicio stop
+		echo "El servicio se ha detenido correctamente."
+		exit 1
+	} || {
+		echo "Hubo un problema al detener el servicio."
+		exit 1
+	}
+	#sudo service $nombre_servicio stop
+	#echo ""
+	#echo "Se ha detenido correct"
+	#exit 1
 	;;
 	3)
-	sudo service $nombre_servicio start
-	exit 1
+	{
+		sudo service $nombre_servicio start
+		echo "El servicio se ha iniciado correctamente."
+		exit 1
+	} || {
+		echo "Hubo un problema al iniciar el servicio."
+		exit 1
+	}
+	#sudo service $nombre_servicio start
+	#exit 1
 	;;
 
 	esac
