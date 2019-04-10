@@ -1,7 +1,18 @@
 #!/bin/bash
 
-read -p -r "Deseas listar los servicios en ejecucion (y/n)?"
-respuesta=${respuesta,,}
-if [[ $respuesta =~ ^(yes|y|) ]] || -z $response ]]; then
-	echo "entro aqui"
-fi
+while true
+do
+ read -r -p "Deseas listar los servicios en ejecucion? [Y/n] " input
+ 
+ case $input in
+     [yY][eE][sS]|[yY])
+ echo "Yes"
+ ;;
+     [nN][oO]|[nN])
+ echo "No"
+        ;;
+     *)
+ echo "Opcion Invalida..."
+ ;;
+ esac
+done
