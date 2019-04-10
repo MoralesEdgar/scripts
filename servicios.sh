@@ -7,17 +7,43 @@ do
  case $input in
      [yY][eE][sS]|[yY])
  service --status-all | grep +
- echo "Escribe el nombre del servicio del que quieres ver su estatus:"
+ echo "Escribe el nombre del servicio:"
  read nombre_servicio
- tmp=`ps awx | grep $nombre_servicio |grep -v grep|wc -l`
- echo ""
- if [ $tmp != 0 ]; then
-	echo "El estado del servicio es el siguiente:"
-	echo ""
-	echo ""
- 	service $nombre_servicio status
- fi
- exit 1
+ while [ "$opcion" != "0" ]
+ do
+
+ echo
+ echo "Que deseas hacer?"
+ echo "----"
+ echo " 1.Verificar el estado del servicio."
+ echo " 2.Hacer down al servicio."
+ echo " 3.Hacer up al servicio."
+
+ read opcion
+
+ case $opcion in
+ 	1)
+	tmp=`ps awx | grep $nombre_servicio |grep -v grep|wc -l`
+	if [ $tmp != 0 ]; then
+		echo "El estado del servicio es el siguiente:"
+		echo ""
+		echo ""
+ 		service $nombre_servicio status
+ 	fi
+ 	echo "El servicio no se encuentra activo."
+ 	exit 1
+	;;
+	2)
+	sudo service $nombre_servicio stop
+	;;
+	3)
+	sudo service $nombre_servicio start
+	;;
+	
+	esac
+	done
+	exit 0
+
  ;;
      [nN][oO]|[nN])
  echo "No"
